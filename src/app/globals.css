@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-mint-500: #d1ffff;
+  --color-mycolor-400: #c71eff;
+  /* --breakpoint-md: 800px;
+  --breakpoint-lg: 900px; */
+  /* --breakpoint-md: initial; */
+  /* --breakpoint-*: initial;
+  --breakpoint-tablet: 10rem;
+  --breakpoint-laptop: 20rem;
+  --breakpoint-desktop: 30rem; */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+    /* 주요 색상 */
+  --color-flow-blue: #0052CC;
+  --color-flow-purple: #6554C0;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 보조 색상 */
+  --color-flow-green: #36B37E;
+
+  /* 강조 색상 */
+  --color-flow-orange: #FF5630;
+  /* 회사 폰트 */
+  --font-noto-sans-kr: "Noto Sans KR", sans-serif;
+
+	/* 상단 폰트 url에서 family 이름을 가져와서 작성합니다 */
+  /* --font-pacifico: "Pacifico"; */
+  --animate-wiggle: wiggle 2s ease-in-out infinite;
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-30deg);
+    }
+    50% {
+      transform: rotate(30deg);
+    }
+  }
+
+  --animate-show-up: show-up 0.5s ease-in-out;
+
+  @keyframes show-up {
+    from { transform: translateY(20px); opacity: 0; }
+
+    to { transform: translateY(0); opacity: 1;}
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@custom-variant dark (&:where(.dark, .dark *));
+
+.card-container {
+  height: 100vh;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
+
+.card {
+  border: 1px solid black;
+  background-color: rgb(102, 205, 170);
+  color: white;
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out 0.3s;
+}
+
+.card:hover{
+transform:scale(1.5);
+background-color: rgb(102, 205, 170, 0.5);
+
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-container {
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.menu-item {
+  border: 1px solid black;
+  width: 100px;
+  height: 20px;
+}
+
+.btn:hover{
+color: black;
+background-color: gray;
+
+}
+
+.menu-container.active {
+opacity: 1;
+transform: translateY(0px);
+}
+
+/* li reset */
+
+li {
+  display: inline-block;
+  list-style: none;
+}
+
+.slideWrap {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 200px;
+  overflow: hidden;
+}
+
+.slideWrap .imgSlide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0;
+  flex-shrink: 0;
+}
+
+.slideWrap .imgSlide li {
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  margin-right: 5vw;
+  background-color: #ccc;
+  text-align: center;
+}
+
+.imgSlide.original {
+  /* animation 추가 */
+  animation: slide01 30s linear infinite;
+}
+
+.imgSlide.clone {
+  /* animation 추가 */
+  animation: slide02 30s linear infinite;
+}
+
+/* original용  */
+@keyframes slide01 {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-100%); }
+  50.01%{ transform: translateX(100%); }
+  100%{ transform: translateX(0); }
+}
+
+/* clone용 */
+@keyframes slide02 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200%); }
+}
+
+
