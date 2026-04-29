@@ -11,11 +11,12 @@ export default function Home() {
     setIsVisible(!isVisible);
   }
   return (
-    <div className="flex h-screen items-center justify-center gap-5">
+    <>
+        <div className="flex h-100 items-center justify-center gap-5">
       <motion.div
         className="h-24 w-24 rounded-lg border shadow-md"
         initial={{ opacity: 0, y: 0 }} //시작상태
-        animate={{ rotate: 360, opacity: 1, y: 20, transition: { duration: 1 }, }} //끝 상태 + 어떻게 이동할것인지
+        animate={{ rotate: 360, opacity: 1, y: 20, transition: { duration: 1, repeat: 3 }, }} //끝 상태 + 어떻게 이동할것인지
       />
       <motion.div
         className="h-24 w-24 rounded-lg border shadow-md"
@@ -27,15 +28,20 @@ export default function Home() {
         initial={{ x: 100 }}
         animate={{ x: 0, transition: { duration: 1, type: "spring", bounce: 0.4 } }}
       />
-       <button onClick={handleClick}>Click me</button>
-       <AnimatePresence>
-        {isVisible && (
-            <motion.div
-              className="h-24 w-24 rounded-lg border shadow-md"
-              initial={{ opacity: 0 }}
-            />
-        )}
-       </AnimatePresence>
-    </div>
+      </div>
+      <div>
+        <button className="cursor-pointer" onClick={handleClick}>Click me</button>
+        <AnimatePresence>
+          {isVisible && (
+              <motion.div
+                className="h-24 w-24 rounded-lg border shadow-md"
+                initial={{ opacity: 0 }}
+                animate={{opacity: 1, transition:{ duration: 1 }}}
+                exit={{opacity: 0, transition:{ duration: 1 }}}
+              />
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }
